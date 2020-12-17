@@ -55,7 +55,7 @@ namespace SECDWebPage.Services
             String spreadsheetId = "1ur6ahoiBFPEUqX4WLwwycNgApAQMIeEw2UfCUK9MvwI";
             var module = new Module();
             module.Sections = new List<Section>();
-            module.Header
+            
             for (int i = 1; i <= 1; i++)
             {
                 module.Sections.Add(GetSection(spreadsheetId, $"Topic {i}"));
