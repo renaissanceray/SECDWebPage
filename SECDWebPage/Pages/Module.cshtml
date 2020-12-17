@@ -1,0 +1,71 @@
+﻿@page
+@model SECDWebPage.ModuleModel
+@{
+    ViewData["Title"] = "Module";
+}
+
+
+
+<h1>Module</h1>
+@foreach (var sec in Model.Module.Sections)
+{
+    @if (sec.Display)
+    {
+        <h2>@sec.Name</h2>
+        <h4>@sec.Description</h4>
+        @foreach (var par in sec.Paragraphs)
+        {
+            <p>@par.Text</p>
+        }
+        @if (sec.Dialogue.Display)
+        {
+            <h3>@sec.Dialogue.Name</h3>
+            <h4>@sec.Dialogue.Description</h4>
+            <p>@sec.Dialogue.Setup</p>
+            @foreach (var line in sec.Dialogue.Lines)
+            {
+                <p>@line</p>
+            }
+        }
+
+        <h2>@sec.Assessment.Name</h2>
+        <p>@sec.Assessment.Description</p>
+
+        @foreach (var question in sec.Assessment.Questions)
+        {
+            
+            
+                <h4>@question.Text</h4>
+                <div class="btn-group-vertical">
+                    @foreach(var answer in question.Answers)
+                    {
+                    
+                        <button onclick="toggleQuestionDetail('@answer.ID')" type="button" class="btn-primary">@answer.Text</button>
+                        <div id="@answer.ID" class="d-none">@answer.Detail</div>
+                    
+                    }
+                </div>
+        }
+        
+
+    }
+}
+
+
+
+
+@section Scripts{
+    <script type="text/javascript">
+        function toggleQuestionDetail(answercount) {
+            console.log(answercount);
+            var detail = document.getElementById(answercount);
+            if (detail.classList.contains("d-none")) {
+                detail.classList.remove("d-none");
+                detail.classList.add("d-block");
+            } else if (detail.classList.contains("d-block")) {
+                detail.classList.remove("d-block");
+                detail.classList.add("d-none");
+            }
+        };
+    </script>
+}
